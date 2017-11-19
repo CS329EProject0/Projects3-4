@@ -1,0 +1,37 @@
+This file is to supplement any tutorials on Django.
+The directory is structured as follows:
+
+whiteboard(referred as [project] in tutorials)
+|
+|   whiteboard
+|   |
+|   |settings.py --> This is where general settings are defined. Toggle debugging, and establishes database
+|   |__init__.py --> For scripts to run on startup
+|   |urls.py     --> Defines base level url paths for different apps
+|   |wsgi.py     --> Ignore this
+|
+|   canvas (referred to as app in tutorials)
+|   |
+|   |migrations  --> This directory will construct all database objects automatically based on classes defined in models.py
+|   |static      --> This is where all CSS files will be to standardize website style
+|   |admin.py    --> Creates models with admin privileges
+|   |apps.py     --> Config file, ignore
+|   |test.py     --> Unit testing goes here
+|   |models.py   --> This is where all database objects will be defined as classes
+|   |views.py    --> Handles all backend functionality and its relation to frontend (i.e. POST, GET, forms, scripts, etc..)
+|   |forms.py    --> Similar to models but for forms
+|
+|   templates   --> This is where all Django HTML files will be located
+Any additional files can be put anywhere
+
+Important terminal commands:
+-Open terminal
+-cd into the directory containing manage.py
+-run command by typing:     python3 manage.py [args]
+
+[args] =
+makemigrations     - Creates migrations to be found in migrations directory
+makemigrations app - Creates migrations specific to the 'app' in our case 'canvas'
+migrate            - This will create all database objects in SQLite3
+createsuperuser    - Creates a super user for the db, important for debugging
+runserver          - Run this command to run a local Django server at localhost:8000/
