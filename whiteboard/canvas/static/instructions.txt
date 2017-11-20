@@ -13,7 +13,7 @@ whiteboard(referred as [project] in tutorials)
 |   canvas (referred to as app in tutorials)
 |   |
 |   |migrations  --> This directory will construct all database objects automatically based on classes defined in models.py
-|   |static      --> This is where all CSS files will be to standardize website style
+|   |static      --> This is where all CSS and JavaScript files will be
 |   |admin.py    --> Creates models with admin privileges
 |   |apps.py     --> Config file, ignore
 |   |test.py     --> Unit testing goes here
@@ -35,3 +35,9 @@ makemigrations app - Creates migrations specific to the 'app' in our case 'canva
 migrate            - This will create all database objects in SQLite3
 createsuperuser    - Creates a super user for the db, important for debugging
 runserver          - Run this command to run a local Django server at localhost:8000/
+
+
+List of important things to do for release 0:
+Create models (Do this after we finish UML diagram)
+Create python files with functions to add SP (Skill Points)
+Complete User Authentication - Ben: "I know how to do some of this, but could use a fair amount of help."

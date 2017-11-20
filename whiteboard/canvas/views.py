@@ -12,5 +12,5 @@ class CanvasIndex(View):
 
     template  = loader.get_template('index.html')
 
-    def get(self):
+    def get(self, request):
         return HttpResponse(self.template.render())
