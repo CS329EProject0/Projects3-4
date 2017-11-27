@@ -41,3 +41,19 @@ List of important things to do for release 0:
 Create models (Do this after we finish UML diagram)
 Create python files with functions to add SP (Skill Points)
 Complete User Authentication - Ben: "I know how to do some of this, but could use a fair amount of help."
+
+List of important things for release 1:
+Finish User Authentication
+Functions in views.py for frequent operations (adding skill points etc...)
+Django forms - Start making basic views
+HTML pages, CSS styles - Ben: "Do all these as if Django wasn't a part of it, I will Django-fy the code"
+
+List of important things for release 2:
+Unit Testing
+Upload files
+Refractoring
+Adding features/ integrating functions made in release 1
+
+List of important things for the FINAL:
+Refractor some more if necessary
+Black-box testing, acceptance testing
