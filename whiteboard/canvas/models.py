@@ -21,17 +21,22 @@ SKILLS = (
 #How to calculate score: Query skill points by question id
 
 #A script will populate DB with skills list
-class Skill:
+class Skill(models.Model):
     name = models.CharField(max_length=25)
     def __str__(self):
         return str(self.name)
 
-class SkillPoints:
-    skill = models.ForeignKey(Skill,null=True)
-    question = models.ForeignKey(Question,null=True)
-    points = models.IntegerField(default=0)
+class Quest(models.Model):
+    requirements = models.IntegerField(default = 0)
+    quest_id = models.IntegerField(primary_key=True)
     def __str__(self):
-        return str(self.skill) + str(self.points)
+        return str(self.quest_id) + ": " + str(self.requirements)
+
+class Quiz(models.Model):
+    quiz_id = models.IntegerField(primary_key=True)
+    quest_id = models.ForeignKey(Quest, null=True)
+    def __str__(self):
+        return str(self.quiz_id)
 
 class Question(models.Model):
     question_id = models.IntegerField(primary_key=True)
@@ -41,19 +46,11 @@ class Question(models.Model):
     def __str__(self):
         return str(self.body) + "\n\n" + str(self.answer)
 
-class Quiz(models.Model):
-
-    quiz_id = models.IntegerField(primary_key=True)
-    quest_id = models.ForeignKey(Quest, null=True)
-    questions = models.ManyToManyField(Question)
+class Assignment(models.Model):
+    assignment_id = models.IntegerField(primary_key=True)
+    quest_id = models.ForeignKey(Quest,null=True)
     def __str__(self):
-        return str(self.quiz_id)
-
-class Quest(models.Model):
-    requirements = models.IntegerField(default = 0)
-    quest_id = models.IntegerField()
-    def __str__(self):
-        return str(self.quest_id) + ": " + str(self.requirements)
+        return str(self.assignment_id)
 
 class Part(models.Model):
     part_id = models.IntegerField(primary_key=True)
@@ -61,12 +58,13 @@ class Part(models.Model):
     def __str__(self):
         return str(self.part_id) + str(self.assigment_id)
 
-class Assignment(models.Model):
-    assignment_id = models.IntegerField(primary_key=True)
-    quest_id = models.ForeignKey(Quest,null=True)
-    rubric = models.ForeignKey(SkillPoints,null=True)
+class SkillPoints(models.Model):
+    skill = models.ForeignKey(Skill,null=True)
+    question = models.ForeignKey(Question,null=True)
+    part = models.ForeignKey(Part,null=True)
+    points = models.IntegerField(default=0)
     def __str__(self):
-        return
+        return str(self.skill) + str(self.points)
 
 class Score(models.Model):
     student_id = models.IntegerField(primary_key=True)
@@ -77,6 +75,7 @@ class Score(models.Model):
 
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name="credentials")
+    is_admin = models.BooleanField(default=False)
 
 class Guild(models.Model):
     guild_id = models.IntegerField(primary_key=True)
@@ -88,10 +87,10 @@ class Guild(models.Model):
 def update_user_profile(sender, instance, created, **kwargs):
     if created:
         Student.objects.create(user=instance)
-        if instance.profile.is_admin:
-            instance.profile.is_backoffice = True
-            instance.profile.save()
-            group = Group.objects.get(name='Back Office')
+        if instance.credentials.is_admin:
+            instance.credentials.is_backoffice = True
+            instance.credentials.save()
+            group = Group.objects.get(name='Staff')
             instance.groups.add(group)
             instance.save
 
