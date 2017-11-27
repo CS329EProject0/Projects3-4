@@ -1,0 +1,94 @@
+
+html {
+    position: relative;
+    min-height: 100%;
+    border: 50px solid #6bd5c9;
+}
+/* backgroud color: more pale than the formalize color*/
+body {
+  bottom: 0;
+  background-color: #8cded5;
+  font-family: "Arial";
+  margin: 0 0 100px; /* bottom = footer height */
+  padding: 25px;
+  
+}
+
+
+h1{
+   color:#ffffff;
+}
+
+.buttonContainer {
+  /* make element inline flex-container */
+  /* this will make its children flex-items */
+  display: inline-flex;
+  /* align-items items in column */
+  flex-direction: column;
+  /* center items horizontally */
+  align-items: center;
+  /* center items vertically */
+  justify-content: center;
+  
+  border: solid 3px black;
+  width: 400px;
+  height: 400px;
+  }
+
+
+.center {
+  text-align: center;
+  margin: auto;
+  width: 60%;
+  padding: 10px;
+} 
+
+.wrapper {
+  position:  absolute;
+  top : 200px;
+  left: 300px;
+  width: 300px;
+  height:300px;
+  
+}
+
+
+button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #ffd171;
+  border: none;
+  color: #e57100;
+  text-align: center;
+  font-size: 14px;
+  padding: 10px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+button:hover span {
+  padding-right: 25px;
+}
+
+button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
