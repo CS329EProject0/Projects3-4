@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registration</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+	<!-- calling the webDesign-->
+	<link rel="stylesheet" href="webDesign.css">
+</head>
+<body>
+<div class="container">
+	<h1 style="color: white; text-align: center;">User Registration</h1>
+		<hr>
+		<table>
+			<tbody>
+				<form id="textForm" action="register.php" method="post">
+					<tr>
+						<td><label>Username:</label>
+							<input type="text" name="userName" id="userName">
+						</td>
+					</tr>
+					<tr>
+						<td><label>Password:</label>
+							<input type="password" name="password" id="password">
+						</td>
+					</tr>
+					<tr>
+						<td><label>Re-type Password:</label>
+							<input type="password" name="confirmPassword" id="confirmPassword">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>
+								Password must be at least 8 characters long.
+							</p>
+							<button class="button" type="submit" style="vertical-align:middle" ><span>Register</span></button>
+						</td>
+					</tr>
+				</form>
+			</tbody>
+		</table>
+</div>
+	
+	
+
+</body>
+
+<script type="text/javascript">
+		function registerUser() {
+			var userName = document.getElementById('userName').value;
+			var password = document.getElementById('password').value;
+			var confirmPassword = document.getElementById('confirmPassword').value;
+			if ((password == confirmPassword) && (password.length > 7)) {
+				alert("Registration successful.")
+				
+				window.location = "member.php"
+			} else if (password.length > 7) {
+				alert("Password do not match.")
+			} else {
+				alert("Ensure password is at least 8 characters long.")
+			}
+		}
+</script>
+</html>
