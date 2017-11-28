@@ -2,6 +2,25 @@ url(https://fonts.googleapis.com/css?family=Patrick+Hand+SC);
 *{
   box-sizing:border-box;
 }
+.button {
+  border:solid 2px #41403E
+  align-self:center;
+  background:transparent;
+  padding:1rem 1rem;
+  margin:0 1rem;
+  transition:all .5s ease;
+  color:#41403E;
+  font-size:2rem;
+  letter-spacing:1px;
+  outline:none;
+  box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.2);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+
+
+
+
+
+}
 html, body{
   width:100%; 
   min-height:100%;
@@ -24,6 +43,7 @@ html, body{
     width:100%;
     min-height:100%;
     margin-bottom:3rem;
+  }
     & button{
       align-self:center;
       background:transparent;
