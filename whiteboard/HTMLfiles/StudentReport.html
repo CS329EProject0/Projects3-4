@@ -2,10 +2,47 @@
 <html>
 <head>
 	<title>Student Report</title>
+	<link rel ="stylesheet" href="design.css">
+	<!-- pie chart magic, quote from https://canvasjs.com/docs/charts/chart-types/html5-pie-chart/-->
+	<script type="text/javascript">
+	window.onload = function () {
+	var chart = new CanvasJS.Chart("chartContainer",
+	{
+		title:{
+			text: "Skill points distribution"
+		},
+		legend: {
+			maxWidth: 350,
+			itemWidth: 120
+		},
+		data: [
+		{
+			type: "pie",
+			showInLegend: true,
+			legendText: "{indexLabel}",
+			dataPoints: [
+				{ y: 10, indexLabel: "Skill 1" },
+				{ y: 15, indexLabel: "Skill 2" },
+				{ y: 20, indexLabel: "Skill 3" },
+				{ y: 25, indexLabel: "Skill 4"},
+				{ y: 30, indexLabel: "Skill 5" },
+			]
+		}
+		]
+	});
+	chart.render();
+}
+</script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 <h1>Student Report</h1>
 <body>
-<br/>
-<button type="button">Back</button>
+	<div id="chartContainer" style="height: 300px; width: 70%;">
+	</div>
+
+	<div id="buttonArrange" style="height: 300px; width: 70%;">
+	<button class="button">generate report</button>
+	<button class="button">Back</button>
+	</div>
 </body>
 </html>
