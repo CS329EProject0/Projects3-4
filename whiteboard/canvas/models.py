@@ -76,6 +76,7 @@ class Score(models.Model):
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name="credentials")
     is_admin = models.BooleanField(default=False)
+    bio = models.CharField(max_length=100,default="No bio")
 
 class Guild(models.Model):
     guild_id = models.IntegerField(primary_key=True)
