@@ -18,24 +18,24 @@
 	  </a>
 	</nav>
 <div class="container">
-	<h1 style="color: white; text-align: center;">User Registration</h1>
+	<h1 style="color: black; text-align: center;">User Registration</h1>
 		<hr>
 		<table>
 			<tbody>
 				<form id="textForm" action="register.php" method="post">
 					<tr>
 						<td><label>Username:</label>
-							<input type="text" name="userName" id="userName">
+							<input type="text" name="userName" id="userName" style="font-family: Verdana">
 						</td>
 					</tr>
 					<tr>
 						<td><label>Password:</label>
-							<input type="password" name="password" id="password">
+							<input type="password" name="password" id="password" style="font-family: Verdana">
 						</td>
 					</tr>
 					<tr>
 						<td><label>Re-type Password:</label>
-							<input type="password" name="confirmPassword" id="confirmPassword">
+							<input type="password" name="confirmPassword" id="confirmPassword" style="font-family: Verdana">
 							<p>
 								Password must be at least 8 characters long.
 							</p>
@@ -43,8 +43,8 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="radio" value="Teacher">Teacher
-							<input type="radio" value="Student">Student
+							<input type="radio" value="Teacher" name="tea_stu" id="rb">Teacher
+							<input type="radio" value="Student" name="tea_stu" id="rb">Student
 						</td>
 					</tr>					
 					<tr>
@@ -52,12 +52,11 @@
 							<button class="button" type="submit" style="vertical-align:middle" ><span>Register</span></button>
 						</td>
 					</tr>
-
 				</form>
 				<script>
-				  $('input').on('click', function() 
+				  $("#rb").on('click', function() 
 				  	{
-				    $(this).parent().find('input:not(:checked)').attr( "disabled", "disabled" );
+				    $(this).parent().find('input:not(:checked)').attr("disabled", "disabled" );
 					})
 				</script>
 			</tbody>
