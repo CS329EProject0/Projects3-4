@@ -10,12 +10,28 @@ body {
 	background-color:#F0F0D8;
 }
 
-.navbar {
-	font-family: 'Text Me One', sans-serif;
+h1  {
+  text-align: center;
 }
 
-h1	{
-	text-align: center;
+#questTable {
+  width: 70%; 
+}
+
+.head, .instructions{
+  text-align: center;
+  font-family: 'Verdana';
+  padding: 10px;
+}
+
+.navbar {
+	font-family: 'Text Me One', sans-serif;
+  background-color: white;
+}
+
+#uploads {
+  background-color:white;
+  padding: 30px;
 }
 
 .login_block, .create_block {

@@ -1,48 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Student Report</title>
-	<link rel ="stylesheet" href="design.css">
-	<!-- pie chart magic, quote from https://canvasjs.com/docs/charts/chart-types/html5-pie-chart/-->
-	<script type="text/javascript">
-	window.onload = function () {
-	var chart = new CanvasJS.Chart("chartContainer",
-	{
-		title:{
-			text: "Skill points distribution"
-		},
-		legend: {
-			maxWidth: 350,
-			itemWidth: 120
-		},
-		data: [
-		{
-			type: "pie",
-			showInLegend: true,
-			legendText: "{indexLabel}",
-			dataPoints: [
-				{ y: 10, indexLabel: "Skill 1" },
-				{ y: 15, indexLabel: "Skill 2" },
-				{ y: 20, indexLabel: "Skill 3" },
-				{ y: 25, indexLabel: "Skill 4"},
-				{ y: 30, indexLabel: "Skill 5" },
-			]
-		}
-		]
-	});
-	chart.render();
-}
-</script>
-<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<title>Student Report</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+<link rel="stylesheet" href="design2.css">
+
 </head>
-<h1>Student Report</h1>
+
 <body>
-	<div id="chartContainer" style="height: 300px; width: 70%;">
+
+<nav class="navbar navbar-light bg-faded">
+	  <a class="navbar-brand" href="welcome.html">
+	    <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+	    WHITEBOARD
+	  </a>
+</nav>
+<div class="container">
+	<h1>Student Report</h1>
+	<div class="row">
+		<div class="col-md-2"></div>	
+		<div class="col-md-8">
+			<center><div id="chartContainer" style="height: 300px; width: 70%;">
+						<!-- pie chart magic, quote from https://canvasjs.com/docs/charts/chart-types/html5-pie-chart/-->
+						<script type="text/javascript">
+						window.onload = function () {
+						var chart = new CanvasJS.Chart("chartContainer",
+						{
+							title:{
+								text: "Skill points distribution"
+							},
+							legend: {
+								maxWidth: 350,
+								itemWidth: 120
+							},
+							data: [
+							{
+								type: "pie",
+								showInLegend: true,
+								legendText: "{indexLabel}",
+								dataPoints: [
+									{ y: 10, indexLabel: "Skill 1" },
+									{ y: 15, indexLabel: "Skill 2" },
+									{ y: 20, indexLabel: "Skill 3" },
+									{ y: 25, indexLabel: "Skill 4" },
+									{ y: 30, indexLabel: "Skill 5" },
+								]
+							}
+							]
+						});
+						chart.render();
+								}
+									</script>
+						<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+			</div>
+			</center>
+		</div>	
+		<div class="col-md-2"></div>
 	</div>
 
-	<div id="buttonArrange" style="height: 300px; width: 70%;">
-	<button class="button">generate report</button>
-	<button class="button">Back</button>
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-md-2 col-lg-2"></div>
+		<div class="col-md-8 col-lg-8">
+			<center>
+			<button class="button">Generate Report</button>
+			<button class="button">Back</button>
+			</center>
+		</div>
+		<div class="col-md-2 col-lg-2"></div>
 	</div>
+</div>
 </body>
 </html>
