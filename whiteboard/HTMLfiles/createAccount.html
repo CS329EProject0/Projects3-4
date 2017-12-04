@@ -6,40 +6,59 @@
 <head>
 	<title>Registration</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="design2.css">
 
 </head>
 <body>
+	<nav class="navbar navbar-light bg-faded">
+	  <a class="navbar-brand" href="welcome.html">
+	    <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+	    WHITEBOARD
+	  </a>
+	</nav>
 <div class="container">
-	<h1 style="color: white; text-align: center;">User Registration</h1>
+	<h1 style="color: black; text-align: center;">User Registration</h1>
 		<hr>
 		<table>
 			<tbody>
 				<form id="textForm" action="register.php" method="post">
 					<tr>
 						<td><label>Username:</label>
-							<input type="text" name="userName" id="userName">
+							<input type="text" name="userName" id="userName" style="font-family: Verdana">
 						</td>
 					</tr>
 					<tr>
 						<td><label>Password:</label>
-							<input type="password" name="password" id="password">
+							<input type="password" name="password" id="password" style="font-family: Verdana">
 						</td>
 					</tr>
 					<tr>
 						<td><label>Re-type Password:</label>
-							<input type="password" name="confirmPassword" id="confirmPassword">
+							<input type="password" name="confirmPassword" id="confirmPassword" style="font-family: Verdana">
+							<p>
+								Password must be at least 8 characters long.
+							</p>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<p>
-								Password must be at least 8 characters long.
-							</p>
+							<input type="radio" id="tea_stu1" value="Teacher" name="tea_stu" id="rb">Teacher
+							<input type="radio" id="tea_stu2" value="Student" name="tea_stu" id="rb">Student
+						</td>
+					</tr>					
+					<tr>
+						<td>
 							<button class="button" type="submit" style="vertical-align:middle" ><span>Register</span></button>
 						</td>
 					</tr>
 				</form>
+				<script>
+				  $("#rb").on('click', function() 
+				  	{
+				    $(this).parent().find('input:not(:checked)').attr("disabled", "disabled" );
+					})
+				</script>
 			</tbody>
 		</table>
 </div>
