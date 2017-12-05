@@ -1,0 +1,95 @@
+url(https://fonts.googleapis.com/css?family=Patrick+Hand+SC);
+url(https://fonts.googleapis.com/css?family=Text+Me+One);
+*{
+  box-sizing:border-box;
+}
+
+
+body {
+	font-family: 'Patrick Hand SC', cursive;
+	background-color:#F0F0D8;
+}
+
+h1  {
+  text-align: center;
+}
+
+#questTable {
+  width: 70%;
+}
+
+.head, .instructions{
+  text-align: center;
+  font-family: 'Verdana';
+  padding: 10px;
+}
+
+.navbar {
+	font-family: 'Text Me One', sans-serif;
+  background-color: white;
+}
+
+#uploads {
+  background-color:white;
+  padding: 30px;
+}
+
+.login_block, .create_block {
+	padding: 40px;
+	text-align: center;
+}
+
+.button {
+  border:solid 2px #41403E
+  background:transparent;
+  width: 140px;
+  height: 70px;
+  color:#41403E;
+  font-size:1rem;
+  letter-spacing:1px;
+  outline:none;
+   /*box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.2); */
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  border:solid 2px #41403E;
+  font-family: 'Patrick Hand SC', cursive;
+
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}

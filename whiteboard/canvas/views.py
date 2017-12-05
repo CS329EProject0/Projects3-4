@@ -56,7 +56,7 @@ class UserFormView(View):
 				#messages.add_message(request, 30, "Registration Failed")
 
 		print("Not valid")
-		return render(request, "register.html", {'form_main':form_main, 'form_blogger':form_blogger})
+		return render(request, "createAccount.html", {'form_main':form_main, 'form_student':form_student})
 
 class UserLoginFormView(View):
     class UserLoginFormView(View):
@@ -90,10 +90,17 @@ class UserLoginFormView(View):
                     #messages.add_message(request, 30, "Login Failed")
 
             return render(request, "login.html", {'form': form})
+
 # Index page view
 class CanvasIndex(View):
 
     template  = loader.get_template('index.html')
+    def get(self, request):
+        return HttpResponse(self.template.render())
+
+class WelcomeView(View):
+
+    template = loader.get_template('Welcome.html')
     def get(self, request):
         return HttpResponse(self.template.render())
 
