@@ -34,13 +34,13 @@ class Quest(models.Model):
 
 class Quiz(models.Model):
     quiz_id = models.IntegerField(primary_key=True)
-    quest_id = models.ForeignKey(Quest, null=True)
+    quest_id = models.ForeignKey(Quest, null=True, on_delete=models.CASCADE)
     def __str__(self):
         return str(self.quiz_id)
 
 class Question(models.Model):
     question_id = models.IntegerField(primary_key=True)
-    quiz_id = models.ForeignKey(Quiz, null=True)
+    quiz_id = models.ForeignKey(Quiz, null=True, on_delete=models.CASCADE)
     body = models.CharField(max_length=280)
     answer = models.CharField(max_length=50)
     def __str__(self):
@@ -48,28 +48,28 @@ class Question(models.Model):
 
 class Assignment(models.Model):
     assignment_id = models.IntegerField(primary_key=True)
-    quest_id = models.ForeignKey(Quest,null=True)
+    quest_id = models.ForeignKey(Quest, null=True,on_delete=models.CASCADE)
     def __str__(self):
         return str(self.assignment_id)
 
 class Part(models.Model):
     part_id = models.IntegerField(primary_key=True)
-    assigment_id = models.ForeignKey(Assignment,null = True)
+    assigment_id = models.ForeignKey(Assignment,null = True, on_delete=models.CASCADE)
     def __str__(self):
         return str(self.part_id) + str(self.assigment_id)
 
 class SkillPoints(models.Model):
-    skill = models.ForeignKey(Skill,null=True)
-    question = models.ForeignKey(Question,null=True)
-    part = models.ForeignKey(Part,null=True)
+    skill = models.ForeignKey(Skill,null=True, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question,null=True,on_delete=models.CASCADE)
+    part = models.ForeignKey(Part,null=True, on_delete=models.CASCADE)
     points = models.IntegerField(default=0)
     def __str__(self):
         return str(self.skill) + str(self.points)
 
 class Score(models.Model):
     student_id = models.IntegerField(primary_key=True)
-    quiz_id = models.ForeignKey(Quiz,null=True)
-    assignment_id = models.ForeignKey(Assignment,null=True)
+    quiz_id = models.ForeignKey(Quiz,null=True, on_delete=models.CASCADE)
+    assignment_id = models.ForeignKey(Assignment,null=True, on_delete=models.CASCADE)
     def __str__(self):
         return str()
 
