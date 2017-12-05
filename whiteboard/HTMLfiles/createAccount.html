@@ -22,7 +22,13 @@
 		<hr>
 		<table>
 			<tbody>
-				<form id="textForm" method="post">
+                {% for field in form %}
+                    {% csrf_token %}
+                    <div class="container">
+                        <b style = "color:teal">{{ field.label_tag }} {{ field }}</b>
+                    </div>
+                {% endfor %}
+				<!--<form id="textForm" method="post">
 					<tr>
 						<td><label>Username:</label>
 							<input type="text" name="userName" id="userName" style="font-family: Verdana">
@@ -57,7 +63,7 @@
 							<button class="button" type="submit" style="vertical-align:middle" onclick = "registerUser()"><span>Register</span></button>
 						</td>
 					</tr>
-				</form>
+				</form>-->
 				<script>
 				  $("#rb").on('click', function() 
 				  	{

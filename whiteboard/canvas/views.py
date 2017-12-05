@@ -7,10 +7,89 @@ from django.template import loader
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.models import User
 from django.views import generic
+from .forms import *
 import random
 
 #The majority of everything will go in here
+class UserFormView(View):
+	form_class_main= UserForm
+	form_class_student = StudentForm
+	template = loader.get_template("createAccount.html")
 
+	def get(self,request):
+		form_main= self.form_class_main(None)
+		form_student = self.form_class_student(None)
+		return render(request, "createAccount.html", {'form_main':form_main,'form_student':form_student})
+
+	#To get form data
+	def post(self,request):
+		form_main= self.form_class_main(request.POST)
+		form_student = self.form_class_student(request.POST)
+
+		print("Checking valid")
+		if form_main.is_valid() and form_student.is_valid():
+			print("Valid!")
+			user = form_main.save(commit=False)
+			user.profile = form_student.save(commit=False)
+
+			#This creates a temporary form user to recieve input from the forms
+
+			#user.refresh_from_db()
+			# This part is to clean the data, not necessary, but pretty common practice
+			user.set_password(form_main.cleaned_data.get('password1'))
+			user.save()
+			user.profile.save()
+			#This is where the auth_user object is created, for the purposes of saving to the database
+			print(user.username)
+			print(user.password)
+			user = authenticate(request, username=user.username, password=form_main.cleaned_data.get('password1'))
+			print(user)
+			#This "logs in" the user
+			if user is not None:
+				if user.is_active:
+					login(request,user)
+					print("Redirecting..............")
+					return HttpResponseRedirect('/')
+			else:
+				#If it fails will display message
+				print("Registration failed.............")
+				#messages.add_message(request, 30, "Registration Failed")
+
+		print("Not valid")
+		return render(request, "register.html", {'form_main':form_main, 'form_blogger':form_blogger})
+
+class UserLoginFormView(View):
+    class UserLoginFormView(View):
+        form_class = UserLoginForm
+        template = loader.get_template("login.html")
+
+        def post(self, request):
+            form = self.form_class(request.POST)
+
+            if form.is_valid():
+
+                # This creates a temporary form user to recieve input from the forms
+                user = form.save(commit=False)
+
+                # This part is to clean the data, not necessary, but pretty common practice
+                username = form.cleaned_data['username']
+                password = form.cleaned_data['password']
+
+                # This is where the auth_user object is created, for the purposes of saving to the database
+                user = authenticate(request, username=username, password=password)
+
+                # This "logs in" the user
+                if user is not None:
+                    if user.is_active:
+                        login(request, user)
+                        print("Redirecting..............")
+                        return HttpResponseRedirect('/')
+                else:
+                    # If it fails will display message
+                    print("Login failed.............")
+                    #messages.add_message(request, 30, "Login Failed")
+
+            return render(request, "login.html", {'form': form})
 # Index page view
 class CanvasIndex(View):
 
