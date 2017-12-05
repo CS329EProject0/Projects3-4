@@ -22,10 +22,15 @@
 		<hr>
 		<table>
 			<tbody>
-				<form id="textForm" action="register.php" method="post">
+				<form id="textForm" method="post">
 					<tr>
 						<td><label>Username:</label>
 							<input type="text" name="userName" id="userName" style="font-family: Verdana">
+						</td>
+					</tr>
+					<tr>
+						<td><label>Email:</label>
+							<input type="text" name="userEmail" id="userEmail" style="font-family: Verdana">
 						</td>
 					</tr>
 					<tr>
@@ -49,7 +54,7 @@
 					</tr>					
 					<tr>
 						<td>
-							<button class="button" type="submit" style="vertical-align:middle" ><span>Register</span></button>
+							<button class="button" type="submit" style="vertical-align:middle" onclick = "registerUser()"><span>Register</span></button>
 						</td>
 					</tr>
 				</form>
@@ -69,15 +74,31 @@
 
 <script type="text/javascript">
 		function registerUser() {
+
+			// get variables by their id
 			var userName = document.getElementById('userName').value;
+			var userEmail = document.getElementById('userEmail').value;
 			var password = document.getElementById('password').value;
 			var confirmPassword = document.getElementById('confirmPassword').value;
+			var isStudent = document.getElementById('tea_stu1')
+			var isTeacher = document.getElementById('tea_stu2')
+
+			// ensure user has filled out all fields
+			if (userName == "" || userEmail == "" || passw||d == "" || confirmPasswd == "" || isStudent == isTeacher) {
+				alert("Make sure you've filled out each field.")
+			}
+
+			// ensure pw is at least 8 characters and passwords match
+			// also, additionaly check that username and/or email or unique
+			// if so, redirect user to their respective home page
 			if ((password == confirmPassword) && (password.length > 7)) {
 				alert("Registration successful.")
+
+				if isStudent {window.location = "StudentHome.html"}
+					else {window.location = "TeacherHome.html"}
 				
-				window.location = "member.php"
 			} else if (password.length > 7) {
-				alert("Password do not match.")
+				alert("Passwords do not match.")
 			} else {
 				alert("Ensure password is at least 8 characters long.")
 			}
