@@ -49,6 +49,7 @@ Django forms - Start making basic views
 HTML pages, CSS styles - Ben: "Do all these as if Django wasn't a part of it, I will Django-fy the code"
 
 List of important things for release 2:
+Everything from release 1 as well
 Unit Testing
 Upload files
 Refractoring
