@@ -9,6 +9,7 @@ import canvas.static as stc
 
 urlpatterns = [
    url(r'^$', CanvasIndex.as_view(), name = "index"),
+   url(r'featured/', Featured.as_view()), #This is a broken url
    url(r'register/', auth_views.login, {'template_name':'createAccount.html'}),
    url(r'login/', auth_views.login, {'template_name':'login.html'}),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
