@@ -22,12 +22,36 @@ class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = ['is_admin','bio']
+
 #Create Assignment
+class AssignmentForm(forms.ModelForm):
+
+	class Meta:
+		model = Assignment
+		# implement file upload here
+		fields = []
 
 #Create Quest
+class CreateQuestForm(forms.ModelForm):
+
+	class Meta:
+		model = Quest
+		fields = ['requirements']
+
 
 #Create Quiz
+class CreateQuizForm(forms.ModelForm):
+
+	class Meta:
+		model = Quiz
+		# figure out a way to add questions
+		fields = []
 
 #Take Quiz
+class TakeQuizForm(forms.ModelForm):
+
+	class Meta:
+		model = Quiz
+		fields = []
 
 #If teacher ===== define set of skills
