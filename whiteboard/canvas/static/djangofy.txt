@@ -1,0 +1,34 @@
+This is a crash course on how to "Django-fy" an html file and link it to the existing files.
+
+A good HTML file to reference => createAccount.html
+
+Below is the list of files you will need to change:
+    views.py
+    _______.html
+    canvas/urls.py
+
+First make sure any static files used in the webpage are placed in the folder canvas/static/
+    - I believe I have placed most if not all the necessary ones in there
+
+Instructions:
+
+1) Copy the HTML file from the HTMLfiles/ directory into the /templates directory
+2) Go to views.py and create a class for your desired page
+    - Follow WelcomeView(View) as an example
+3) Go to canvas/urls.py and enter a line similar to url(r'welcome/', WelcomeView.as_view(), name='welcome'),
+    - Don't forget the comma at the end
+    - Change the name of the url to the page (without the .html) and reference the view you just created
+       give it a simple name
+4) Now edit the HTML document
+    a) Add the line {% load style %} just after the first <html> tag
+    b) Add this line to the header <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+        -This loads style.css to the page
+    c) In the header, or any other href links to other pages within the project, replace with the following line
+        - {% url 'welcome'%}
+        - or whatever page you're trying to link to
+    d) The following commands are fairly page-specific so I'm just going to list their functionality
+        - {{ var }}...... This will reference some variable that you defined in the view you
+        created in step 2
+        - {% command %}..... This is how functions are run in Django, you can see examples in {% load %}
+        as well as the {% for x in list%}...{%endfor%}
+            - This previous command is used often in the forms
