@@ -110,6 +110,14 @@ def update_profile(request, user_id):
     user.bio = "Some words plus the random number: {}".format(str(foo))
     user.save()
 
+# Student Home page
+class StudentHomeView(View):
+	template = loader.get_template('StudentHome.html')
+	def get(self, request):
+        return HttpResponse(self.template.render())
+
+
+
 #@login_required
 #@transaction.atomic
 """def update_profile(request):
