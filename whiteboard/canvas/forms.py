@@ -21,12 +21,7 @@ class StudentForm(forms.ModelForm):
 
     class Meta:
         model = Student
-<<<<<<< HEAD
         fields = ['bio']
-=======
-        fields = ['is_admin','bio']
-
->>>>>>> a08c7451df5de2bbcc6970f7efa016a6eb71522c
 #Create Assignment
 class AssignmentForm(forms.ModelForm):
 
