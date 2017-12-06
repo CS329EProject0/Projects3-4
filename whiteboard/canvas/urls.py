@@ -13,4 +13,5 @@ urlpatterns = [
    url(r'welcome/', WelcomeView.as_view(), name='welcome'),
    url(r'register/', UserFormView.as_view(), name="register"),
    url(r'login/', auth_views.login, {'template_name':'login.html'}),
+   url(r'create_quiz/', QuizCreationView.as_view(),name='quizCreation')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

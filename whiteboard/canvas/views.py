@@ -110,6 +110,54 @@ def update_profile(request, user_id):
     user.bio = "Some words plus the random number: {}".format(str(foo))
     user.save()
 
+class QuizView(View):
+
+    template = loader.get_template('Quiz.html')
+    def get(self, request):
+        return HttpResponse(self.template.render())
+
+class QuestView(View):
+
+    template = loader.get_template('Quest.html')
+    def get(self, request):
+        return HttpResponse(self.template.render())
+
+class AssignmentView(View):
+
+    template = loader.get_template('Assignment.html')
+    def get(self, request):
+        return HttpResponse(self.template.render())
+'''
+class CreateAssignmentView(View):
+
+    template = loader.get_template('CreateAssignment.html')
+    def get(self, request):
+        return HttpResponse(self.template.render())
+'''
+
+class GuildView(View):
+
+    template = loader.get_template('Guild.html')
+    def get(self, request):
+        return HttpResponse(self.template.render())
+
+class StudentHomeView(View):
+
+    template = loader.get_template('StudentHome.html')
+    def get(self, request):
+        return HttpResponse(self.template.render())
+
+class QuizCreationView(View):
+
+    template = loader.get_template('CreateQuiz.html')
+    def get(self, request):
+
+# Student Home page
+class StudentHomeView(View):
+	template = loader.get_template('StudentHome.html')
+	def get(self, request):
+        return HttpResponse(self.template.render())
+
 #@login_required
 #@transaction.atomic
 """def update_profile(request):
