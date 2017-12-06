@@ -151,12 +151,12 @@ class QuizCreationView(View):
 
     template = loader.get_template('CreateQuiz.html')
     def get(self, request):
+
+# Student Home page
+class StudentHomeView(View):
+	template = loader.get_template('StudentHome.html')
+	def get(self, request):
         return HttpResponse(self.template.render())
-
-
-
-
-
 
 #@login_required
 #@transaction.atomic
