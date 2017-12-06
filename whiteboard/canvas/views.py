@@ -59,44 +59,44 @@ class UserFormView(View):
 		return render(request, "createAccount.html", {'form_main':form_main, 'form_student':form_student})
 
 class UserLoginFormView(View):
-    class UserLoginFormView(View):
-        form_class = UserLoginForm
-        template = loader.get_template("login.html")
+    form_class = UserLoginForm
+    template = loader.get_template("login.html")
 
-        def post(self, request):
-            form = self.form_class(request.POST)
+    def post(self, request):
+        form = self.form_class(request.POST)
 
-            if form.is_valid():
+        if form.is_valid():
 
-                # This creates a temporary form user to recieve input from the forms
-                user = form.save(commit=False)
+            # This creates a temporary form user to recieve input from the forms
+            user = form.save(commit=False)
 
-                # This part is to clean the data, not necessary, but pretty common practice
-                username = form.cleaned_data['username']
-                password = form.cleaned_data['password']
+            # This part is to clean the data, not necessary, but pretty common practice
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
 
-                # This is where the auth_user object is created, for the purposes of saving to the database
-                user = authenticate(request, username=username, password=password)
+            # This is where the auth_user object is created, for the purposes of saving to the database
+            user = authenticate(request, username=username, password=password)
 
-                # This "logs in" the user
-                if user is not None:
-                    if user.is_active:
-                        login(request, user)
-                        print("Redirecting..............")
-                        return HttpResponseRedirect('/')
-                else:
-                    # If it fails will display message
-                    print("Login failed.............")
-                    #messages.add_message(request, 30, "Login Failed")
+            # This "logs in" the user
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    print("Redirecting..............")
+                    return HttpResponseRedirect('/')
+            else:
+                # If it fails will display message
+                print("Login failed.............")
+                #messages.add_message(request, 30, "Login Failed")
 
-            return render(request, "login.html", {'form': form})
+        return render(request, "login.html", {'form': form})
 
 # Index page view
 class CanvasIndex(View):
 
     template  = loader.get_template('index.html')
     def get(self, request):
-        return HttpResponse(self.template.render())
+        context_dict = {"user":request.user}
+        return HttpResponse(self.template.render(context=context_dict))
 
 class WelcomeView(View):
 

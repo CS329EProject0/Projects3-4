@@ -48,25 +48,5 @@
 			</tbody>
 		</table>
 </div>
-	
-	
-
 </body>
-
-<script type="text/javascript">
-		function registerUser() {
-			var userName = document.getElementById('userName').value;
-			var password = document.getElementById('password').value;
-			var confirmPassword = document.getElementById('confirmPassword').value;
-			if ((password == confirmPassword) && (password.length > 7)) {
-				alert("Registration successful.")
-				
-				window.location = "member.php"
-			} else if (password.length > 7) {
-				alert("Password do not match.")
-			} else {
-				alert("Ensure password is at least 8 characters long.")
-			}
-		}
-</script>
 </html>

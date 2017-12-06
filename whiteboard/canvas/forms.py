@@ -21,7 +21,7 @@ class StudentForm(forms.ModelForm):
 
     class Meta:
         model = Student
-        fields = ['is_admin','bio']
+        fields = ['bio']
 #Create Assignment
 
 #Create Quest
