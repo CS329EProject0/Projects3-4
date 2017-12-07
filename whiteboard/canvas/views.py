@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import View
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404, render_to_response
 from django.template import loader
@@ -106,11 +106,11 @@ class WelcomeView(View):
         return HttpResponse(self.template.render())
 
 
-def update_profile(request, user_id):
-    user = User.objects.get(pk=user_id)
-    foo = random.randint(0,100)
-    user.bio = "Some words plus the random number: {}".format(str(foo))
-    user.save()
+    def update_profile(request, user_id):
+        user = User.objects.get(pk=user_id)
+        foo = random.randint(0,100)
+        user.bio = "Some words plus the random number: {}".format(str(foo))
+        user.save()
 
 
 class CreateQuizView(View):
@@ -129,16 +129,41 @@ class QuizView(View):
 
 class CreateAssignmentView(View):
 
+    form_main = CreateAssignmentForm
     template = loader.get_template('CreateAssignment.html')
+
+    def post(self, request):
+        form_main = AssignmentForm(request.POST)
+
+        if form_main.is_valid():
+            description = form_main.cleaned_data['description']
+            newAssignment = Assignment(description = description).save()
+            return HttpResponseRedirect('/createAssignment/')
+
     def get(self, request):
-        return HttpResponse(self.template.render())
+        form_main_instance = self.form_main()
+        return render(request, "CreateAssignment.html", {"form_main": form_main_instance})
 
 
 class AssignmentView(View):
 
-    template = loader.get_template('Assignment.html')
-    def get(self, request):
-        return HttpResponse(self.template.render())
+    # the additional variable, in this case assignment_id, is passed into the function
+    # when a url request is made. The variable, assigment_id, is grabbed from the url
+    # request as designnated in the urls.py file
+    def get(self, request, assignment_id):
+
+        # try to grab the appropriate assignment with its id
+        try:
+            assignment_specific = Assignment.objects.get(pk = assignment_id)
+        except Assignment.DoesNotExist:
+            raise Http404("Assignment does not exist.")
+
+        # return the template with the assignment object passed into it, in this case
+        # we are calling the object "assigment_specific"
+        # this variable will now be able to be used in the Assigment.html template
+        return render(request, 'Assignment.html', {'assignment_specific':assignment_specific, 'assignment_id':assignment_id})
+
+
 
 
 class QuestView(View):
