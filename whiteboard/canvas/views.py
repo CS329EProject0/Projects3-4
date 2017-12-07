@@ -30,7 +30,7 @@ class UserFormView(View):
 		if form_main.is_valid() and form_student.is_valid():
 			print("Valid!")
 			user = form_main.save(commit=False)
-			user.profile = form_student.save(commit=False)
+			user.credentials = form_student.save(commit=False)
 
 			#This creates a temporary form user to recieve input from the forms
 
@@ -38,7 +38,7 @@ class UserFormView(View):
 			# This part is to clean the data, not necessary, but pretty common practice
 			user.set_password(form_main.cleaned_data.get('password1'))
 			user.save()
-			user.profile.save()
+			user.credentials.save()
 			#This is where the auth_user object is created, for the purposes of saving to the database
 			print(user.username)
 			print(user.password)
