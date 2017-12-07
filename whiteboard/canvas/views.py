@@ -98,11 +98,13 @@ class CanvasIndex(View):
         context_dict = {"user":request.user}
         return HttpResponse(self.template.render(context=context_dict))
 
+
 class WelcomeView(View):
 
     template = loader.get_template('Welcome.html')
     def get(self, request):
         return HttpResponse(self.template.render())
+
 
 def update_profile(request, user_id):
     user = User.objects.get(pk=user_id)
@@ -110,11 +112,34 @@ def update_profile(request, user_id):
     user.bio = "Some words plus the random number: {}".format(str(foo))
     user.save()
 
+
+class CreateQuizView(View):
+
+    template = loader.get_template('CreateQuiz.html')
+    def get(self, request):
+        return HttpResponse(self.template.render())
+
+
 class QuizView(View):
 
     template = loader.get_template('Quiz.html')
     def get(self, request):
         return HttpResponse(self.template.render())
+
+
+class CreateAssignmentView(View):
+
+    template = loader.get_template('CreateAssignment.html')
+    def get(self, request):
+        return HttpResponse(self.template.render())
+
+
+class AssignmentView(View):
+
+    template = loader.get_template('Assignment.html')
+    def get(self, request):
+        return HttpResponse(self.template.render())
+
 
 class QuestView(View):
 
@@ -122,24 +147,6 @@ class QuestView(View):
     def get(self, request):
         return HttpResponse(self.template.render())
 
-class AssignmentView(View):
-
-    template = loader.get_template('Assignment.html')
-    def get(self, request):
-        return HttpResponse(self.template.render())
-'''
-class CreateAssignmentView(View):
-
-    template = loader.get_template('CreateAssignment.html')
-    def get(self, request):
-        return HttpResponse(self.template.render())
-'''
-
-class GuildView(View):
-
-    template = loader.get_template('Guild.html')
-    def get(self, request):
-        return HttpResponse(self.template.render())
 
 class StudentHomeView(View):
 
@@ -147,16 +154,14 @@ class StudentHomeView(View):
     def get(self, request):
         return HttpResponse(self.template.render())
 
-class QuizCreationView(View):
 
-    template = loader.get_template('CreateQuiz.html')
+class GuildView(View):
+
+    template = loader.get_template('Guild.html')
     def get(self, request):
-
-# Student Home page
-class StudentHomeView(View):
-	template = loader.get_template('StudentHome.html')
-	def get(self, request):
         return HttpResponse(self.template.render())
+
+
 
 #@login_required
 #@transaction.atomic
