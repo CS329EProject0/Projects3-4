@@ -7,3 +7,4 @@ whiteboard/HTMLfiles/.DS_Store
 *.pyc
 *.pyc
 whiteboard/db.sqlite3
+whiteboard/db.sqlite3
