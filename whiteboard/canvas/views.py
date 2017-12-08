@@ -105,6 +105,11 @@ class WelcomeView(View):
     template = loader.get_template('Welcome.html')
     def get(self, request):
         context_dict = {"user": request.user}
+        if request.user is not None:
+	        if(request.user.credentials.is_teacher):
+				return HttpResponseRedirect('/teacher_home')
+	        else:
+		        return HttpResponseRedirect('/teacher_home')
         return HttpResponse(self.template.render(context=context_dict))
 
 
