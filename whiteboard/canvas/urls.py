@@ -5,7 +5,6 @@ from . import views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
-import canvas.static as stc
 
 urlpatterns = [
    url(r'^$', CanvasIndex.as_view(), name = "index"),
@@ -18,6 +17,7 @@ urlpatterns = [
    url(r'^createAssignment/$', CreateAssignmentView.as_view(), name = 'create_assignment'),
    url(r'^guild/$', GuildView.as_view(),name='guild'),
    url(r'^student_home/$', StudentHomeView.as_view(),name='student_home'),
+   url(r'^teacher_home/$', TeacherHomeView.as_view(),name='teacher_home'),
    url(r'^quiz/$', QuizView.as_view(),name='quiz'),
    url(r'^create_quiz/$', CreateQuizView.as_view(),name='quizCreation')  
    
