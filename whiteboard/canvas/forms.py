@@ -21,7 +21,7 @@ class StudentForm(forms.ModelForm):
 
     class Meta:
         model = Student
-        fields = ['bio']
+        fields = ['is_teacher']
         
 #Create Assignment
 class AssignmentForm(forms.ModelForm):
