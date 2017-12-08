@@ -106,7 +106,7 @@ class WelcomeView(View):
 	template = loader.get_template('Welcome.html')
 	def get(self, request):
 		context_dict = {"user": request.user}
-		if request.user.is_anonymous:
+		if not request.user.is_anonymous():
 			if(request.user.credentials.is_teacher):
 				return HttpResponseRedirect('/teacher_home')
 			else:
