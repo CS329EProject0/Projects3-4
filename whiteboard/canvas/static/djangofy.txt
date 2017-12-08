@@ -20,7 +20,7 @@ Instructions:
     - Change the name of the url to the page (without the .html) and reference the view you just created
        give it a simple name
 4) Now edit the HTML document
-    a) Add the line {% load style %} just after the first <html> tag
+    a) Add the line {% load static %} just after the first <html> tag
     b) Add this line to the header <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
         -This loads style.css to the page
     c) In the header, or any other href links to other pages within the project, replace with the following line

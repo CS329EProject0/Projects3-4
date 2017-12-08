@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" href= "{% static "style.css" %}">
+	<title>Assignment {{assignment_specific.assignment_id}} </title>
+</head>
+<body>
+	<nav class="navbar navbar-light bg-faded">
+	  <a class="navbar-brand" href="welcome.html">
+	    <img src="{% static "logo.png" %}" width="30" height="30" class="d-inline-block align-top" alt="">
+	    WHITEBOARD
+	  </a>
+	</nav>
+
+<div class="container">	
+	<h1 class="head">Assignment {{assignment_specific.assignment_id}} </h1>
+		<hr>
+		<table>
+			<tbody>
+				<p>{{assignment_specific.description}}</p>
+			</tbody>
+		</table>
+</div>
+
+	<!--
+	<div class="row">
+		<h3 class="instructions">
+			Write an essay on the effect on demand of cheap competitors on a luxury brand.<br>
+			Upload the essay in either .doc or .pdf
+		</h3>
+	</div>
+	-->
+
+	<br/>
+	
+
+	<div class="row head">
+		<div class="col-md-4"></div>
+		<div class="col-md-4" id="uploads">
+			<button type="button">Upload file</button>
+			<button type="button">Submit</button>
+			<button type="button" onclick="location.href='StudentHome.html'">Back</button>
+		</div>
+		<div class="col-md-4"></div>
+	</div>
+</div>
+</body>
+</html>

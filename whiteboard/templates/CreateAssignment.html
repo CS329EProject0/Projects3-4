@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static "style.css" %}">
+	<title>Create Assignments</title>
+</head>
+<body>	
+<nav class="navbar navbar-light bg-faded">
+	  <a class="navbar-brand" href="welcome.html">
+	    <img src="{% static "logo.png" %}" width="30" height="30" class="d-inline-block align-top" alt="">
+	    WHITEBOARD
+	  </a>
+</nav>
+<div class="container">
+	<h1>Create Assignments</h1>
+<br/>
+
+	<p>Enter the description of the assignment below.</p>
+	<form action="/createAssignment/" method="post">
+		{% for field in form_main %}
+			{% csrf_token %}
+			<div class="containter">
+				<b style = "font-family: Verdana">{{ field.label_tag }}</b> {{ field }}
+			</div>
+		{% endfor %}
+		<input type = "submit" value = "Publish Assignment">
+	</form>
+
+</div>
+</body>
+</html>
