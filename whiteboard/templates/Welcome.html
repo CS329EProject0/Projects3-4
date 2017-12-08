@@ -13,6 +13,7 @@
 	    <img src="{% static "logo.png" %}" width="30" height="30" class="d-inline-block align-top" alt="">
 	    WHITEBOARD
 	  </a>
+        <p>Welcome! {{ user.username }}</p>
 	</nav>
 	<div class="container">
 
@@ -27,7 +28,7 @@
 
 					<div class="login_block">
 					<h3>Login As Teacher</h3>
-					<button class="button" onclick="location.href='login.html'">Login As Teacher</button>
+					<button class="button" onclick="location.href={%  url 'login'%}">Login As Teacher</button>
 					</div>
 
 					<div class="login_block">
