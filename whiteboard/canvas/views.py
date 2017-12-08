@@ -84,7 +84,7 @@ class UserLoginFormView(View):
 				if user.is_active:
 					login(request, user)
 					print("Redirecting..............")
-					return HttpResponseRedirect('/')
+					return HttpResponseRedirect('/welcome')
 			else:
 				# If it fails will display message
 				print("Login failed.............")
@@ -106,7 +106,7 @@ class WelcomeView(View):
 	template = loader.get_template('Welcome.html')
 	def get(self, request):
 		context_dict = {"user": request.user}
-		if request.user is not None:
+		if request.user is not 'AnonymousUser':
 			if(request.user.credentials.is_teacher):
 				return HttpResponseRedirect('/teacher_home')
 			else:

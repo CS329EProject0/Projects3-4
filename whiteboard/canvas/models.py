@@ -99,7 +99,4 @@ def update_user_profile(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=Student)
 def save_user_profile(sender, instance, **kwargs):
-    if instance.is_admin:
-        """group = Group.objects.get(name='Teacher')
-        instance.user.groups.add(group)"""
-        instance.user.save()
+    instance.user.save()
