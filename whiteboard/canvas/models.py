@@ -50,7 +50,7 @@ class Assignment(models.Model):
     assignment_id = models.IntegerField(primary_key=True)
     quest_id = models.ForeignKey(Quest, null=True,on_delete=models.CASCADE)
     description = models.CharField(null = True, max_length = 500)
-    file = models.FileField()
+    file = models.FileField(null = True)
     def __str__(self):
         return str(self.assignment_id)
 
