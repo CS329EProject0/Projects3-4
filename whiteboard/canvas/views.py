@@ -42,6 +42,7 @@ class UserFormView(View):
 			#This is where the auth_user object is created, for the purposes of saving to the database
 			print(user.username)
 			print(user.password)
+			print(user.credentials.bio)
 			user = authenticate(request, username=user.username, password=form_main.cleaned_data.get('password1'))
 			print(user)
 			#This "logs in" the user
@@ -103,14 +104,8 @@ class WelcomeView(View):
 
     template = loader.get_template('Welcome.html')
     def get(self, request):
-        return HttpResponse(self.template.render())
-
-
-    def update_profile(request, user_id):
-        user = User.objects.get(pk=user_id)
-        foo = random.randint(0,100)
-        user.bio = "Some words plus the random number: {}".format(str(foo))
-        user.save()
+        context_dict = {"user": request.user}
+        return HttpResponse(self.template.render(context=context_dict))
 
 
 class CreateQuizView(View):
