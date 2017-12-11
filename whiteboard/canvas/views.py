@@ -194,6 +194,17 @@ class GuildView(View):
 	def get(self, request):
 		return HttpResponse(self.template.render())
 
+class StudentReportView(View):
+
+	template = loader.get_template('StudentReport.html')
+	def get(self, request):
+		return HttpResponse(self.template.render())
+
+class TeacherReportsView(View):
+
+	template = loader.get_template('TeacherReports.html')
+	def get(self, request):
+		return HttpResponse(self.template.render())
 
 
 #@login_required
