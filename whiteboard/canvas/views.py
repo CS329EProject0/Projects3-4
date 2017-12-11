@@ -158,8 +158,10 @@ class AssignmentView(View):
 		# this variable will now be able to be used in the Assigment.html template
 		return render(request, 'Assignment.html', {'assignment_specific':assignment_specific, 'assignment_id':assignment_id})
 
+class AssignmentsView(View):
 
-
+    def get(self, request):
+        return render(request, 'Assignment.html')
 
 class QuestView(View):
 
