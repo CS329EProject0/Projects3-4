@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+{% load static %}
 <head>
 	<title>Quest</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 <link rel="stylesheet" href="design2.css">
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 	
 </head>
 <body>
@@ -56,7 +58,7 @@
 
 <br/>
 
-<center><button class="button" onclick="location.href='StudentHome.html'">Back</button></center>
+<center><button class="button" onclick="location.href={% url 'student_home'%}">Back</button></center>
 
 </body>
 </html>
