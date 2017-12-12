@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+	<title>Quiz</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<h1>Quiz</h1>
+<body>
+    <div class="container">
+        {% for iter in quiz_id_list %}
+            <button type="button" onclick="location.href='/quiz/{{ iter }}'"> Take Quiz {{ iter }}</button>
+        {% endfor %}
+    </div>
+</body>
+<button type="button" onclick="location.href={% url 'student_home'%}">Back</button>
+</html>

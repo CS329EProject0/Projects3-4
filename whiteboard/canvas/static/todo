@@ -1,0 +1,19 @@
+What is left to do:
+File                                Needs
+Assignment.html                     fasdf
+createAccount.html                  Should redirect to welcome page, needs to save is_teacher
+CreateAssignment.html               asdf
+CreateQuiz.html                     asdf
+Guild.html                          asdf
+index.html                          None
+login.html                          Should redirect to welcome page
+Quest.html                          asdf
+Quiz.html                           asdf
+register.html                       asdf
+StudentGuild.html                   asdf
+StudentHome.html                    asdf
+StudentReport.html                  Make url, view
+TeacherHome.html                    asdf
+TeacherReports.html                 asdf
+Welcome.html                        If logged in => if teacher then redirects to teacher home
+                                                 => if student then redirect to student home
