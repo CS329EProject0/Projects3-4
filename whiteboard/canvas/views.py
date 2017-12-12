@@ -108,14 +108,28 @@ class WelcomeView(View):
 
 
 class CreateQuizView(View):
-
+	createQuizForm = CreateQuizForm
 	template = loader.get_template('CreateQuiz.html')
+
+	def post(self, request):
+		createQuizFormInstance = self.createQuizForm(request.POST)
+
+		if createQuizFormInstance.is_valid():
+			numQuestions = createQuizFormInstance.cleaned_data['numQuestions']
+			newQuiz = Quiz().save()
+			allQuizzes = Quiz.objects.all()
+			mostRecentQuiz_id = allQuizzes[len(allQuizzes)-1].quiz_id
+			for i in range (int(numQuestions)):
+				newQuestion = Question(mostRecentQuiz_id).save()
+			return HttpResponseRedirect('/quiz/'+str(mostRecentQuiz_id))
+
 	def get(self, request):
-		return HttpResponse(self.template.render())
+		createQuizFormInstance = self.createQuizForm(request.POST)
+		return render(request, "CreateQuiz.html", {"createQuizForm": createQuizFormInstance})
 
 #This displays available quizzes
-class QuizView1(View):
-	template = loader.get_template('Quiz1.html')
+class QuizzesView(View):
+	template = loader.get_template('Quizzes.html')
 	def get(self, request):
 		quiz_list = Quiz.objects.all()
 		quiz_id_list = [item.quiz_id for item in quiz_list]
@@ -157,7 +171,7 @@ class CreateAssignmentView(View):
 		if form_main.is_valid():
 			description = form_main.cleaned_data['description']
 			newAssignment = Assignment(description = description).save()
-			return HttpResponseRedirect('/createAssignment/')
+			return HttpResponseRedirect('/create_assignment/')
 
 	def get(self, request):
 		form_main_instance = self.form_main()
@@ -184,8 +198,9 @@ class AssignmentView(View):
 
 class AssignmentsView(View):
 
-    def get(self, request):
-        return render(request, 'Assignment.html')
+	def get(self, request):
+		query_results = Assignment.objects.all()
+		return render(request, 'Assignments.html', {"allAssignments": query_results})
 
 class QuestView(View):
 

@@ -45,7 +45,7 @@ class CreateQuizForm(forms.ModelForm):
 	class Meta:
 		model = Quiz
 		# figure out a way to add questions
-		fields = []
+		fields = ['numQuestions']
 
 #Take Quiz
 class TakeQuizForm(forms.ModelForm):

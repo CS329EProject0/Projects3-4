@@ -35,6 +35,8 @@ class Quest(models.Model):
 class Quiz(models.Model):
     quiz_id = models.IntegerField(primary_key=True)
     quest_id = models.ForeignKey(Quest, null=True, on_delete=models.CASCADE)
+    numQuestionsChoices= (('1', 1), ('2',2), ('3',3), ('4',4), ('5',5), ('6',6), ('7',7), ('8',8), ('9',9), ('10',10),)
+    numQuestions = models.CharField(max_length = 2, choices = numQuestionsChoices, default = 5)
     def __str__(self):
         return str(self.quiz_id)
 

@@ -11,19 +11,44 @@
 <body>
 <nav class="navbar navbar-light bg-faded">
 	  <a class="navbar-brand" href="welcome.html">
-	    <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+	    <img src="{% static "logo.png" %}" width="30" height="30" class="d-inline-block align-top" alt="">
 	    WHITEBOARD
 	  </a>
 </nav>
 <div class="container">
+	
 	<div class="row">
 
-		<button type="button" onclick="location.href={% url 'quest'%}">Quests</button>
-		<button type="button" onclick="location.href={% url 'quiz'%}">Quizzes</button>
-		<button type="button" onclick="location.href={% url 'assignments'%}">Assignments</button>
-		<button type="button" onclick="location.href={% url 'guild'%}">Student Guilds</button>
-		<button type="button" onclick="location.href={% url 'student_report'%}">Student Reports</button>
-		<div>
+
+			<div class="col-md-2"></div>
+
+			<div class="col-md-8">
+				<div class="login_block">
+				<h3>Quizzes and Assignments</h3>
+				<button type="button" onclick="location.href={% url 'quizzes'%}">Quizzes</button>
+				<button type="button" onclick="location.href={% url 'assignments'%}">Assignments</button>
+				</div>
+
+				<div class="login_block">
+				<h3>Quests</h3>
+				<button type="button" onclick="location.href={% url 'quest'%}">Quests</button>
+				</div>
+
+				<div class="login_block">
+				<h3>Your Guild</h3>
+				<button type="button" onclick="location.href={% url 'guild'%}">Your Guild</button>
+				</div>
+
+				<div class="login_block">
+				<h3>Student Report</h3>
+				<button type="button" onclick="location.href={% url 'student_report'%}">Student Reports</button>
+				</div>
+			<div>
+
+
+			<div class="col-md-2"></div>
+
+	</div>
 </div>
 </body>
 </html>

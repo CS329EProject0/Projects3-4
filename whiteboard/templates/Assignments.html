@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" href= "{% static "style.css" %}">
+	<title>Assignments</title>
+</head>
+<body>
+	<nav class="navbar navbar-light bg-faded">
+	  <a class="navbar-brand" href="{% url 'welcome'%}">
+	    <img src="{% static "logo.png" %}" width="30" height="30" class="d-inline-block align-top" alt="">
+	    WHITEBOARD
+	  </a>
+	</nav>
+
+<div class="container">	
+	<h1 class="head">Assignments</h1>
+		<hr>
+		<table>
+			<tr>
+				<th>Assignment</th>
+				<th>Description</th>
+			</tr>
+			{% for assignment in allAssignments %}
+			<tr>
+				<td><center>{{assignment.assignment_id}}</center></td>
+				<td>{{assignment.description}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+		<br>
+		<p>To navigate to an assigment, enter the url extension "assigment/(assigment number)"</p>
+</div>
+</body>
+</html>

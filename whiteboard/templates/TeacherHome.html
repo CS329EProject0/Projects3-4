@@ -19,17 +19,20 @@
 <div class="container">
 
 		<div class="row">
+			
 				<div class="col-md-2"></div>
 
 				<div class="col-md-8">
 					<div class="login_block">
-					<h3>Create New Quiz</h3>
+					<h3>Quizzes</h3>
 					<button type="button" onclick="location.href={% url 'create_quiz'%}">Create New Quiz</button>
+					<button type="button" onclick="location.href={% url 'quizzes'%}">View Quizzes</button>
 					</div>
 
 					<div class="login_block">
 					<h3>Create New Assignment</h3>
-					<button type="button" onclick="location.href={% url 'create_assignment'%}">Create new Assignment</button>
+					<button type="button" onclick="location.href={% url 'create_assignment'%}">Create New Assignment</button>
+					<button type="button" onclick="location.href={% url 'assignments'%}">View Assignments</button>
 					</div>
 
 					<div class="login_block">
