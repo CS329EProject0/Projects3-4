@@ -90,13 +90,8 @@ class Guild(models.Model):
 def update_user_profile(sender, instance, created, **kwargs):
     if created:
         Student.objects.create(user=instance)
-        """if instance.credentials.is_admin:
-            instance.credentials.is_backoffice = True
-            instance.credentials.save()
-            group = Group.objects.get(name='Staff')
-            instance.groups.add(group)
-            instance.save"""
+    instance.credentials.save()
 
-@receiver(post_save, sender=Student)
+"""@receiver(post_save, sender=Student)
 def save_user_profile(sender, instance, **kwargs):
-    instance.user.save()
+    instance.user.save()"""

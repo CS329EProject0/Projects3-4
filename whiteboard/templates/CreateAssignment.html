@@ -18,7 +18,7 @@
 <br/>
 
 	<p>Enter the description of the assignment below.</p>
-	<form action="/createAssignment/" method="post">
+	<form action="{% url 'create_assignment' %}" method="post">
 		{% for field in form_main %}
 			{% csrf_token %}
 			<div class="containter">
@@ -27,7 +27,7 @@
 		{% endfor %}
 		<input type = "submit" value = "Publish Assignment">
 	</form>
-
+<button type="button" onclick="location.href={% url 'teacher_home'%}">Back</button>
 </div>
 </body>
 </html>

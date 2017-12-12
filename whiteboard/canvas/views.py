@@ -26,26 +26,20 @@ class UserFormView(View):
 		form_main= self.form_class_main(request.POST)
 		form_student = self.form_class_student(request.POST)
 
-		print("Checking valid")
 		if form_main.is_valid() and form_student.is_valid():
-			print("Valid!")
 			user = form_main.save(commit=False)
 			user.credentials = form_student.save(commit=False)
 
 			#This creates a temporary form user to recieve input from the forms
 
+			print(user.credentials.is_teacher)
 			#user.refresh_from_db()
 			# This part is to clean the data, not necessary, but pretty common practice
 			user.set_password(form_main.cleaned_data.get('password1'))
 			user.save()
 			user.credentials.save()
 			#This is where the auth_user object is created, for the purposes of saving to the database
-			print(user.username)
-			print(user.password)
-			print(user.credentials.is_teacher)
 			user = authenticate(request, username=user.username, password=form_main.cleaned_data.get('password1'))
-			print(user)
-			print(user.credentials)
 			#This "logs in" the user
 			if user is not None:
 				if user.is_active:
@@ -106,7 +100,7 @@ class WelcomeView(View):
 	template = loader.get_template('Welcome.html')
 	def get(self, request):
 		context_dict = {"user": request.user}
-		if request.user.is_anonymous:
+		if not request.user.is_anonymous:
 			if(request.user.credentials.is_teacher):
 				return HttpResponseRedirect('/teacher_home')
 			else:
@@ -164,8 +158,10 @@ class AssignmentView(View):
 		# this variable will now be able to be used in the Assigment.html template
 		return render(request, 'Assignment.html', {'assignment_specific':assignment_specific, 'assignment_id':assignment_id})
 
+class AssignmentsView(View):
 
-
+    def get(self, request):
+        return render(request, 'Assignment.html')
 
 class QuestView(View):
 
@@ -192,6 +188,17 @@ class GuildView(View):
 	def get(self, request):
 		return HttpResponse(self.template.render())
 
+class StudentReportView(View):
+
+	template = loader.get_template('StudentReport.html')
+	def get(self, request):
+		return HttpResponse(self.template.render())
+
+class TeacherReportsView(View):
+
+	template = loader.get_template('TeacherReports.html')
+	def get(self, request):
+		return HttpResponse(self.template.render())
 
 
 #@login_required
