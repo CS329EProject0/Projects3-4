@@ -2,21 +2,37 @@
 <html>
 {% load static %}
 <head>
-	<title>Quiz</title>
-	<link rel ="stylesheet" href="design.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+	<link rel="stylesheet" href= "{% static "style.css" %}">
+	<title>Quiz {{quiz_specific.quiz_id}} </title>
 </head>
-<h1>Quiz</h1>
 <body>
-	This quiz covers pg. 23-28 in the textbook.
-</body>
-<br/>
-<button type="button">Start</button>
-<br/>
-<br/>
-<button type="button">Finish</button>
-<br/>
-<button type="button" onclick="location.href={% url 'student_home'%}">Back</button>
+	<nav class="navbar navbar-light bg-faded">
+	  <a class="navbar-brand" href="{% url 'welcome'%}">
+	    <img src="{% static "logo.png" %}" width="30" height="30" class="d-inline-block align-top" alt="">
+	    WHITEBOARD
+	  </a>
+	</nav>
 
+<div class="container">
+	<h1 class="head">Quiz {{quiz_specific.quiz_id}} </h1>
+		<hr>
+		<table>
+			<tbody>
+				<p></p>
+			</tbody>
+		</table>
+</div>
+	<br/>
+
+
+	<div class="row head">
+		<div class="col-md-4"></div>
+		<div class="col-md-4" id="uploads">
+			<button type="button" onclick="location.href={% url 'student_home'%}">Back</button>
+		</div>
+		<div class="col-md-4"></div>
+	</div>
+</div>
+</body>
 </html>

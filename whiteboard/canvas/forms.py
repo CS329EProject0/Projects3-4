@@ -25,7 +25,7 @@ class StudentForm(forms.ModelForm):
         
 #Create Assignment
 class AssignmentForm(forms.ModelForm):
-
+	#file = forms.FilePathField("./static")
 	class Meta:
 		model = Assignment
 		# implement file upload here
@@ -49,15 +49,10 @@ class CreateQuizForm(forms.ModelForm):
 
 #Take Quiz
 class TakeQuizForm(forms.ModelForm):
-
-	class Meta:
-		model = Quiz
-		fields = []
+	answers = forms.CharField(max_length=100)
 
 class CreateAssignmentForm(forms.ModelForm):
 
 	class Meta:
 		model = Assignment
 		fields = ['description']
-
-#If teacher ===== define set of skills

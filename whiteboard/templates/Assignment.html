@@ -8,7 +8,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-light bg-faded">
-	  <a class="navbar-brand" href="welcome.html">
+	  <a class="navbar-brand" href="{% url 'welcome'%}">
 	    <img src="{% static "logo.png" %}" width="30" height="30" class="d-inline-block align-top" alt="">
 	    WHITEBOARD
 	  </a>
@@ -23,19 +23,7 @@
 			</tbody>
 		</table>
 </div>
-
-	<!--
-	<div class="row">
-		<h3 class="instructions">
-			Write an essay on the effect on demand of cheap competitors on a luxury brand.<br>
-			Upload the essay in either .doc or .pdf
-		</h3>
-	</div>
-	-->
-
 	<br/>
-	
-
 	<div class="row head">
 		<div class="col-md-4"></div>
 		<div class="col-md-4" id="uploads">

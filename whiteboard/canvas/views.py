@@ -28,16 +28,15 @@ class UserFormView(View):
 
 		if form_main.is_valid() and form_student.is_valid():
 			user = form_main.save(commit=False)
-			user.credentials = form_student.save(commit=False)
 
-			#This creates a temporary form user to recieve input from the forms
 
-			print(user.credentials.is_teacher)
-			#user.refresh_from_db()
 			# This part is to clean the data, not necessary, but pretty common practice
 			user.set_password(form_main.cleaned_data.get('password1'))
 			user.save()
-			user.credentials.save()
+			#print(user.Student.is_teacher)
+			user.student.is_teacher = form_student.cleaned_data['is_teacher']
+			user.student.save()
+
 			#This is where the auth_user object is created, for the purposes of saving to the database
 			user = authenticate(request, username=user.username, password=form_main.cleaned_data.get('password1'))
 			#This "logs in" the user
@@ -45,7 +44,7 @@ class UserFormView(View):
 				if user.is_active:
 					login(request,user)
 					print("Redirecting..............")
-					return HttpResponseRedirect('/')
+					return HttpResponseRedirect('/welcome')
 			else:
 				#If it fails will display message
 				print("Registration failed.............")
@@ -101,7 +100,7 @@ class WelcomeView(View):
 	def get(self, request):
 		context_dict = {"user": request.user}
 		if not request.user.is_anonymous:
-			if(request.user.credentials.is_teacher):
+			if(request.user.student.is_teacher):
 				return HttpResponseRedirect('/teacher_home')
 			else:
 				return HttpResponseRedirect('/student_home')
@@ -114,12 +113,37 @@ class CreateQuizView(View):
 	def get(self, request):
 		return HttpResponse(self.template.render())
 
+#This displays available quizzes
+class QuizView1(View):
+	template = loader.get_template('Quiz1.html')
+	def get(self, request):
+		quiz_list = Quiz.objects.all()
+		quiz_id_list = [item.quiz_id for item in quiz_list]
+		print(quiz_id_list)
+		context_dict = {"user": request.user, "quiz_id_list":quiz_id_list}
+		return HttpResponse(self.template.render(context=context_dict))
 
 class QuizView(View):
 
 	template = loader.get_template('Quiz.html')
-	def get(self, request):
-		return HttpResponse(self.template.render())
+	def get(self, request, quiz_id):
+		try:
+			quiz_specific = Quiz.objects.get(pk = quiz_id)
+		except Quiz.DoesNotExist:
+			raise Http404("Quiz does not exist.")
+		return render(request, 'Quiz.html', {'quiz_specific':quiz_specific, 'quiz_id':quiz_id})
+
+	def post(self, request):
+		form_main = TakeQuizForm(request.POST)
+		context_dict = {"user": request.user}
+		if form_main.is_valid():
+			description = form_main.cleaned_data['description']
+			newAssignment = Assignment(description = description).save()
+			return HttpResponseRedirect('/createAssignment/')
+
+	#This will grade the assignment, queries Questions with quiz_id and the given list of answers
+	def grade(self,request, answer_list):
+		pass
 
 
 class CreateAssignmentView(View):
@@ -180,7 +204,10 @@ class TeacherHomeView(View):
 
 	template = loader.get_template('TeacherHome.html')
 	def get(self, request):
-		return HttpResponse(self.template.render())
+		context_dict = {"user": request.user}
+		if(not request.user.student.is_teacher):
+			return HttpResponseRedirect('/student_home')
+		return HttpResponse(self.template.render(context=context_dict))
 
 class GuildView(View):
 
@@ -199,26 +226,3 @@ class TeacherReportsView(View):
 	template = loader.get_template('TeacherReports.html')
 	def get(self, request):
 		return HttpResponse(self.template.render())
-
-
-#@login_required
-#@transaction.atomic
-"""def update_profile(request):
-	if request.method == 'POST':
-		user_form = UserForm(request.POST, instance=request.user)
-		profile_form = ProfileForm(request.POST, instance=request.user.profile)
-		if user_form.is_valid() and profile_form.is_valid():
-			user_form.save()
-			profile_form.save()
-			messages.success(request, _('Your profile was successfully updated!'))
-			return redirect('settings:profile')
-		else:
-			messages.error(request, _('Please correct the error below.'))
-	else:
-		user_form = UserForm(instance=request.user)
-		profile_form = ProfileForm(instance=request.user.profile)
-	return render(request, 'profiles/profile.html', {
-		'user_form': user_form,
-		'profile_form': profile_form
-	})
-"""

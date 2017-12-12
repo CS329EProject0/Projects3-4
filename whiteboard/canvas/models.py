@@ -76,7 +76,7 @@ class Score(models.Model):
         return str()
 
 class Student(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name="credentials")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     is_teacher = models.BooleanField(default=False)
     bio = models.CharField(max_length=100,default="No bio")
 
@@ -87,11 +87,7 @@ class Guild(models.Model):
         return str(self.guild_id)
 
 @receiver(post_save, sender=User)
-def update_user_profile(sender, instance, created, **kwargs):
+def save_user_profile(sender, instance, created, **kwargs):
     if created:
         Student.objects.create(user=instance)
-    instance.credentials.save()
-
-"""@receiver(post_save, sender=Student)
-def save_user_profile(sender, instance, **kwargs):
-    instance.user.save()"""
+    instance.student.save()
