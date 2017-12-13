@@ -7,22 +7,22 @@ from django.contrib.auth.forms import UserCreationForm
 #This will handle form submissions throughout the application, the actual implementation is in the views.py file
 class UserLoginForm(forms.ModelForm):
 
-    class Meta:
-        model = User
-        fields = ['username','password']
+	class Meta:
+		model = User
+		fields = ['username','password']
 
 class UserForm(UserCreationForm):
 
-    class Meta:
-        model = User
-        fields = ['username','first_name','last_name','password1','password2']
+	class Meta:
+		model = User
+		fields = ['username','first_name','last_name','password1','password2']
 
 class StudentForm(forms.ModelForm):
 
-    class Meta:
-        model = Student
-        fields = ['is_teacher']
-        
+	class Meta:
+		model = Student
+		fields = ['is_teacher']
+		
 #Create Assignment
 class AssignmentForm(forms.ModelForm):
 	#file = forms.FilePathField("./static")
@@ -44,12 +44,14 @@ class CreateQuizForm(forms.ModelForm):
 
 	class Meta:
 		model = Quiz
-		# figure out a way to add questions
 		fields = ['numQuestions']
 
 #Take Quiz
 class TakeQuizForm(forms.ModelForm):
-	answers = forms.CharField(max_length=100)
+
+	class Meta:
+		model = Question
+		fields = ['answer']
 
 class CreateAssignmentForm(forms.ModelForm):
 

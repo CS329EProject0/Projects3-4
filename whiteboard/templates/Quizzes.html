@@ -8,11 +8,17 @@
 </head>
 <h1>Quizzes</h1>
 <body>
+	<center>
     <div class="container">
         {% for iter in quiz_id_list %}
-            <button type="button" onclick="location.href='/quiz/{{ iter }}'"> Take Quiz {{ iter }}</button>
+        <br>
+        <div>
+            <button class="button" onclick="location.href='/quiz/{{ iter }}'"> Take Quiz {{ iter }}</button>
+        </div>
         {% endfor %}
     </div>
 </body>
-<button type="button" onclick="location.href={% url 'student_home'%}">Back</button>
+<br>
+<button class="button" onclick="location.href={% url 'student_home'%}">Back</button>
+</center>
 </html>

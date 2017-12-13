@@ -118,9 +118,10 @@ class CreateQuizView(View):
 			numQuestions = createQuizFormInstance.cleaned_data['numQuestions']
 			newQuiz = Quiz().save()
 			allQuizzes = Quiz.objects.all()
-			mostRecentQuiz_id = allQuizzes[len(allQuizzes)-1].quiz_id
+			mostRecentQuiz = allQuizzes[len(allQuizzes)-1]
+			mostRecentQuiz_id = mostRecentQuiz.quiz_id
 			for i in range (int(numQuestions)):
-				newQuestion = Question(mostRecentQuiz_id).save()
+				newQuestion = Question(quiz_id = mostRecentQuiz, body="Enter the question body.", answer="Enter the correct answer.").save()
 			return HttpResponseRedirect('/quiz/'+str(mostRecentQuiz_id))
 
 	def get(self, request):
@@ -133,19 +134,27 @@ class QuizzesView(View):
 	def get(self, request):
 		quiz_list = Quiz.objects.all()
 		quiz_id_list = [item.quiz_id for item in quiz_list]
-		print(quiz_id_list)
 		context_dict = {"user": request.user, "quiz_id_list":quiz_id_list}
 		return HttpResponse(self.template.render(context=context_dict))
 
 class QuizView(View):
 
 	template = loader.get_template('Quiz.html')
+	takeQuizForm = TakeQuizForm
 	def get(self, request, quiz_id):
 		try:
 			quiz_specific = Quiz.objects.get(pk = quiz_id)
 		except Quiz.DoesNotExist:
 			raise Http404("Quiz does not exist.")
-		return render(request, 'Quiz.html', {'quiz_specific':quiz_specific, 'quiz_id':quiz_id})
+		allQuestions = Question.objects.all()
+		quizSpecificQuestions = []
+		for question in allQuestions:
+			if question.quiz_id == quiz_specific:
+				quizSpecificQuestions.append(question)
+		numQuestions = len(quizSpecificQuestions)
+
+		takeQuizFormInstance = self.takeQuizForm()
+		return render(request, 'Quiz.html', {'quiz_specific':quiz_specific, 'quiz_id':quiz_id, 'quizSpecificQuestions':quizSpecificQuestions, 'takeQuizForm':takeQuizFormInstance, 'numQuestions':numQuestions})
 
 	def post(self, request):
 		form_main = TakeQuizForm(request.POST)

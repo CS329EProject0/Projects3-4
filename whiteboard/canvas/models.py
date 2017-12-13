@@ -46,7 +46,7 @@ class Question(models.Model):
     body = models.CharField(max_length=280)
     answer = models.CharField(max_length=50)
     def __str__(self):
-        return str(self.body) + "\n\n" + str(self.answer)
+        return str("Quiz: "+str(self.quiz_id) + ", Question: " + str(self.question_id))
 
 class Assignment(models.Model):
     assignment_id = models.IntegerField(primary_key=True)

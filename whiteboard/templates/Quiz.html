@@ -19,7 +19,17 @@
 		<hr>
 		<table>
 			<tbody>
-				<p></p>
+        <form action="{% url 'create_assignment' %}" method="post">
+				{% for question in quizSpecificQuestions %}
+        <br>
+          <h2>Question {{question.question_id}}</h2>
+          <p>{{question.body}}</p>
+            {% csrf_token %}
+            <div class="container">
+              <b style = "font-family: Verdana">{{takeQuizForm.answer.label_tag}}</b>{{takeQuizForm.answer}}
+            </div>
+        {% endfor %}
+      </form>
 			</tbody>
 		</table>
 </div>
@@ -27,8 +37,8 @@
 <!--
 	This quiz covers pg. 23-28 in the textbook.
 </body>
+-->
 
-<br/>
 <!--when click on start, present quiz
 <button class="button" onclick="myFunction()">Start</button>
 <form>

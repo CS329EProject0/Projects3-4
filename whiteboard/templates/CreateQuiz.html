@@ -7,8 +7,8 @@
 </head>
 <h1>Create a Quiz</h1>
 <body>
-    <p>Enter the number of questions in the quiz.</p>
     <center>
+    <p>Enter the number of questions in the quiz.</p>
 	<form action="{% url 'create_quiz' %}" method="post">
         {% for field in createQuizForm %}
             {% csrf_token %}
@@ -19,6 +19,7 @@
         <input type = "submit" value = "Publish Quiz">
     </form>
 		<button type="button" onclick="location.href={% url 'teacher_home'%}">Back</button>
+    </center>
 </body>
 </html>
 
