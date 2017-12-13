@@ -58,3 +58,9 @@ class CreateAssignmentForm(forms.ModelForm):
 	class Meta:
 		model = Assignment
 		fields = ['description']
+
+class EditQuizForm(forms.ModelForm):
+
+	class Meta:
+		model = Question
+		fields = ['body', 'answer']

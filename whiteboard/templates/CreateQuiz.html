@@ -13,12 +13,14 @@
         {% for field in createQuizForm %}
             {% csrf_token %}
             <div class="container">
-                <b style = "font-family: Verdana">{{ field.label_tag }}</b> {{ field }}
+                <b style = "font-family: Verdana">Number of Questions: </b> {{ field }}
             </div>
         {% endfor %}
-        <input type = "submit" value = "Publish Quiz">
+        <br>
+        <input type = "submit" class="button" value = "Publish Quiz">
     </form>
-		<button type="button" onclick="location.href={% url 'teacher_home'%}">Back</button>
+        <br>
+		<button type="button" class="button" onclick="location.href={% url 'teacher_home'%}">Back</button>
     </center>
 </body>
 </html>

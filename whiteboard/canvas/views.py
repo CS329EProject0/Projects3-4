@@ -122,7 +122,7 @@ class CreateQuizView(View):
 			mostRecentQuiz_id = mostRecentQuiz.quiz_id
 			for i in range (int(numQuestions)):
 				newQuestion = Question(quiz_id = mostRecentQuiz, body="Enter the question body.", answer="Enter the correct answer.").save()
-			return HttpResponseRedirect('/quiz/'+str(mostRecentQuiz_id))
+			return HttpResponseRedirect('/edit_quiz/'+str(mostRecentQuiz_id))
 
 	def get(self, request):
 		createQuizFormInstance = self.createQuizForm(request.POST)
@@ -136,6 +136,14 @@ class QuizzesView(View):
 		quiz_id_list = [item.quiz_id for item in quiz_list]
 		context_dict = {"user": request.user, "quiz_id_list":quiz_id_list}
 		return HttpResponse(self.template.render(context=context_dict))
+
+class EditQuizzesView(View):
+    template = loader.get_template('EditQuizzes.html')
+    def get(self, request):
+        quiz_list = Quiz.objects.all()
+        quiz_id_list = [item.quiz_id for item in quiz_list]
+        context_dict = {"user": request.user, "quiz_id_list":quiz_id_list}
+        return HttpResponse(self.template.render(context=context_dict))
 
 class QuizView(View):
 
@@ -155,14 +163,6 @@ class QuizView(View):
 
 		takeQuizFormInstance = self.takeQuizForm()
 		return render(request, 'Quiz.html', {'quiz_specific':quiz_specific, 'quiz_id':quiz_id, 'quizSpecificQuestions':quizSpecificQuestions, 'takeQuizForm':takeQuizFormInstance, 'numQuestions':numQuestions})
-
-	def post(self, request):
-		form_main = TakeQuizForm(request.POST)
-		context_dict = {"user": request.user}
-		if form_main.is_valid():
-			description = form_main.cleaned_data['description']
-			newAssignment = Assignment(description = description).save()
-			return HttpResponseRedirect('/createAssignment/')
 
 	#This will grade the assignment, queries Questions with quiz_id and the given list of answers
 	def grade(self,request, answer_list):
@@ -250,3 +250,65 @@ class TeacherReportsView(View):
 	template = loader.get_template('TeacherReports.html')
 	def get(self, request):
 		return HttpResponse(self.template.render())
+
+class EditQuizView(View):
+
+    template = loader.get_template('EditQuiz.html')
+    editQuizForm = EditQuizForm
+    def get(self, request, quiz_id):
+        try:
+            quiz_specific = Quiz.objects.get(pk = quiz_id)
+        except Quiz.DoesNotExist:
+            raise Http404("Quiz does not exist.")
+
+
+        allQuestions = Question.objects.all()
+        quizSpecificQuestions = []
+
+        for question in allQuestions:
+            if question.quiz_id == quiz_specific:
+                quizSpecificQuestions.append(question)
+        numQuestions = len(quizSpecificQuestions)
+
+        editQuizFormInstance = self.editQuizForm()
+        
+        context_dict = {'quiz_specific':quiz_specific, 'quiz_id':quiz_id, \
+        'quizSpecificQuestions':quizSpecificQuestions, 'editQuizForm':editQuizFormInstance, 'numQuestions':numQuestions}
+        return render(request, 'EditQuiz.html', context=context_dict)
+
+    def post(self, request, quiz_id):
+        form_main = EditQuizForm(request.POST)
+        context_dict = {"user": request.user}
+        if form_main.is_valid():
+            body = form_main.cleaned_data['body']
+            answer = form_main.cleaned_data['answer']
+            quiz_specific = Quiz.objects.get(pk = quiz_id)
+
+            questions_specific = []
+            allQuestions = Question.objects.all()
+            for question in allQuestions:
+                if question.quiz_id == quiz_specific:
+                    body = form_main.cleaned_data['body']
+                    answer = form_main.cleaned_data['answer']
+                    question.body = body
+                    question.answer = answer
+                    question.save()
+                    questions_specific.append(question)
+
+
+            return HttpResponseRedirect('/quizzes/')
+
+class UpdateQuestionView(View):
+
+    def post(self, request, question_id):
+        form_main = EditQuizForm(request.POST)
+        context_dict = {"user": request.user}
+        if form_main.is_valid():
+            body = form_main.cleaned_data['body']
+            answer = form_main.cleaned_data['answer']
+            question_specific = Question.objects.get(pk = question_id)
+            body = form_main.cleaned_data['body']
+            answer = form_main.cleaned_data['answer']
+            question_specific.body = body
+            question_specific.answer = answer
+            question_specific.save()

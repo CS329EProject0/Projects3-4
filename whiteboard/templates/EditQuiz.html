@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" href= "{% static "style.css" %}">
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
+    <script src="http://malsup.github.com/jquery.form.js"></script> 
+
+
+	<title>Edit Quiz {{quiz_specific.quiz_id}} </title>
+</head>
+<body>
+	<nav class="navbar navbar-light bg-faded">
+	  <a class="navbar-brand" href="{% url 'welcome'%}">
+	    <img src="{% static "logo.png" %}" width="30" height="30" class="d-inline-block align-top" alt="">
+	    WHITEBOARD
+	  </a>
+	</nav>
+
+<div class="container">
+	<h1 class="head">Edit Quiz {{quiz_specific.quiz_id}}</h1>
+		<hr>
+		<table>
+			<tbody>
+        {% for question in quizSpecificQuestions %}
+        <form id="question{{question.question_id}}UpdateForm" action="{% url 'update_question' question_id=question.question_id %}" method="post">
+        <br>
+          <h2>Question {{question.question_id}}</h2>
+            {% csrf_token %}
+            <div class="container">
+              <b style = "font-family: Verdana">{{editQuizForm.body.label_tag}}</b>{{editQuizForm.body}}
+              <br>
+              <b style = "font-family: Verdana">{{editQuizForm.answer.label_tag}}</b>{{editQuizForm.answer}}
+              <input type = "submit" value = "Update Question">&nbsp;
+            </div>
+      	</form>
+        {% endfor %}
+			</tbody>
+		</table>
+		<br>
+		<center>
+			<button class="button" onclick="location.href={% url 'teacher_home' %}">Home</button>
+		</center>
+		<br>
+	</div>
+</body>
+</html>
+
+<script> 
+	$(function() {
+	    $("#question1UpdateForm").submit(function(event) {
+	        // Stop form from submitting normally
+	        event.preventDefault();
+	        var updateForm = $(this);
+	        // Send the data using post
+	        var posting = $.post( updateForm.attr('action'), updateForm.serialize() );
+	        // if success:
+	        posting.success(function(data) {
+	            alert("Question updated.");
+	        });
+	        // if failure:
+	        posting.fail(function(data) {
+	            alert("Question updated.");
+	        });
+	    });
+	});
+	$(function() {
+	    $("#question2UpdateForm").submit(function(event) {
+	        // Stop form from submitting normally
+	        event.preventDefault();
+	        var updateForm = $(this);
+	        // Send the data using post
+	        var posting = $.post( updateForm.attr('action'), updateForm.serialize() );
+	        // if success:
+	        posting.success(function(data) {
+	            alert("Question updated.");
+	        });
+	        // if failure:
+	        posting.fail(function(data) {
+	            alert("Question updated.");
+	        });
+	    });
+	});
+	$(function() {
+	    $("#question3UpdateForm").submit(function(event) {
+	        // Stop form from submitting normally
+	        event.preventDefault();
+	        var updateForm = $(this);
+	        // Send the data using post
+	        var posting = $.post( updateForm.attr('action'), updateForm.serialize() );
+	        // if success:
+	        posting.success(function(data) {
+	            alert("Question updated.");
+	        });
+	        // if failure:
+	        posting.fail(function(data) {
+	            alert("Question updated.");
+	        });
+	    });
+	});
+	$(function() {
+	    $("#question4UpdateForm").submit(function(event) {
+	        // Stop form from submitting normally
+	        event.preventDefault();
+	        var updateForm = $(this);
+	        // Send the data using post
+	        var posting = $.post( updateForm.attr('action'), updateForm.serialize() );
+	        // if success:
+	        posting.success(function(data) {
+	            alert("Question updated.");
+	        });
+	        // if failure:
+	        posting.fail(function(data) {
+	            alert("Question updated.");
+	        });
+	    });
+	});
+	$(function() {
+	    $("#question5UpdateForm").submit(function(event) {
+	        // Stop form from submitting normally
+	        event.preventDefault();
+	        var updateForm = $(this);
+	        // Send the data using post
+	        var posting = $.post( updateForm.attr('action'), updateForm.serialize() );
+	        // if success:
+	        posting.success(function(data) {
+	            alert("Question updated.");
+	        });
+	        // if failure:
+	        posting.fail(function(data) {
+	            alert("Question updated.");
+	        });
+	    });
+	});
+	$(function() {
+	    $("#question6UpdateForm").submit(function(event) {
+	        // Stop form from submitting normally
+	        event.preventDefault();
+	        var updateForm = $(this);
+	        // Send the data using post
+	        var posting = $.post( updateForm.attr('action'), updateForm.serialize() );
+	        // if success:
+	        posting.success(function(data) {
+	            alert("Question updated.");
+	        });
+	        // if failure:
+	        posting.fail(function(data) {
+	            alert("Question updated.");
+	        });
+	    });
+	});
+	$(function() {
+	    $("#question7UpdateForm").submit(function(event) {
+	        // Stop form from submitting normally
+	        event.preventDefault();
+	        var updateForm = $(this);
+	        // Send the data using post
+	        var posting = $.post( updateForm.attr('action'), updateForm.serialize() );
+	        // if success:
+	        posting.success(function(data) {
+	            alert("Question updated.");
+	        });
+	        // if failure:
+	        posting.fail(function(data) {
+	            alert("Question updated.");
+	        });
+	    });
+	});
+	$(function() {
+	    $("#question8UpdateForm").submit(function(event) {
+	        // Stop form from submitting normally
+	        event.preventDefault();
+	        var updateForm = $(this);
+	        // Send the data using post
+	        var posting = $.post( updateForm.attr('action'), updateForm.serialize() );
+	        // if success:
+	        posting.success(function(data) {
+	            alert("Question updated.");
+	        });
+	        // if failure:
+	        posting.fail(function(data) {
+	            alert("Question updated.");
+	        });
+	    });
+	});
+	$(function() {
+	    $("#question9UpdateForm").submit(function(event) {
+	        // Stop form from submitting normally
+	        event.preventDefault();
+	        var updateForm = $(this);
+	        // Send the data using post
+	        var posting = $.post( updateForm.attr('action'), updateForm.serialize() );
+	        // if success:
+	        posting.success(function(data) {
+	            alert("Question updated.");
+	        });
+	        // if failure:
+	        posting.fail(function(data) {
+	            alert("Question updated.");
+	        });
+	    });
+	});
+	$(function() {
+	    $("#question10UpdateForm").submit(function(event) {
+	        // Stop form from submitting normally
+	        event.preventDefault();
+	        var updateForm = $(this);
+	        // Send the data using post
+	        var posting = $.post( updateForm.attr('action'), updateForm.serialize() );
+	        // if success:
+	        posting.success(function(data) {
+	            alert("Question updated.");
+	        });
+	        // if failure:
+	        posting.fail(function(data) {
+	            alert("Question updated.");
+	        });
+	    });
+	});
+</script> 
